@@ -1,0 +1,26 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
+/** @type {import('tailwindcss').Config} */
+export default {
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	theme: {
+		extend: {
+			fontFamily: {
+			  rubik: ['Rubik', 'sans-serif'],
+			},
+			colors:{
+				customOrange :{
+					500:'#DB500B',
+					600:'#B8440A',
+					700:'#993808'
+				},
+				customBlue:{
+					400:'#4906c9',
+					500:'#340098',
+					600:'#110032'
+				}
+			}
+		  },
+	},
+	plugins: [],
+}

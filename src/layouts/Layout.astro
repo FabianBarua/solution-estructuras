@@ -2,6 +2,7 @@
 import ViewTransitions from "astro/components/ViewTransitions.astro";
 import "@/styles/main.css";
 import HeaderHome from "@/components/HeaderHome.astro";
+import FooterHome from "@/components/FooterHome.astro";
 
 interface Props {
   title: string;
@@ -31,9 +32,12 @@ const { title, isHome } = Astro.props;
       crossorigin
     />
   </head>
-  <body class="font-rubik min-h-dvh no-scrollbar">
+  <body class="font-rubik min-h-dvh no-scrollbar flex flex-col text-white">
     <HeaderHome isHome={isHome || false} />
-    <slot />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <FooterHome />
     <style>
       body {
         background: conic-gradient(

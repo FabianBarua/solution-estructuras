@@ -13,13 +13,11 @@ const { isHome }: Props = Astro.props;
 
 <header
   id={isHome ? "headerHome" : "headerLayout"}
+  transition:name="header"
   transition:animate="none"
   class={`w-full text-white py-12 bg-customOrange-500 transition-all flex flex-col  items-center sm:rounded-b-[100px]  `}
 >
-  <nav
-    transition:name="header-home-nav"
-    class="w-full max-w-5xl flex justify-between items-center p-6 lg:p-0"
-  >
+  <nav class="w-full max-w-5xl flex justify-between items-center p-6 lg:p-0">
     <a href="/">
       <Logo />
     </a>
@@ -140,9 +138,9 @@ const { isHome }: Props = Astro.props;
 
     @keyframes headerIn {
       from {
-        height: 146px;
-        border-bottom-right-radius: 100px;
-        border-bottom-left-radius: 100px;
+        height: 196px;
+        border-bottom-right-radius: 50px;
+        border-bottom-left-radius: 50px;
       }
       to {
         height: 466px;

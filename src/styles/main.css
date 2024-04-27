@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+
+
 /* rubik-regular - latin */
 @font-face {
     font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */

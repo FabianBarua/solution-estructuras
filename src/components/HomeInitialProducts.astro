@@ -1,0 +1,29 @@
+---
+import ProductCard from "@components/ProductCard.astro";
+import ShowMoreIcon from "@icons/ShowMoreIcon.astro";
+import ShowMoreButton from "@components/ShowMoreButton.astro";
+import GridResponsive from "@components/GridResponsive.astro";
+
+const initialProducts = Array(5).fill({
+  id: 1,
+  shortName: "Andamio",
+  imgUrl: "/images/andamio2.png",
+});
+---
+
+<div class="w-full mt-12 mb-3 flex justify-end">
+  <ShowMoreButton href="/productos/">
+    <p class="text-[18px]">Ver más</p>
+    <ShowMoreIcon />
+  </ShowMoreButton>
+</div>
+
+<GridResponsive>
+  {
+    initialProducts.map(({ id, shortName, imgUrl }) => (
+      <li class=" w-full h-44 min-w-32 max-w-44  ">
+        <ProductCard id={id} shortName={shortName} imageUrl={imgUrl} />
+      </li>
+    ))
+  }
+</GridResponsive>

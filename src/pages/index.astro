@@ -1,5 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
+import SectionResize from "@components/SectionResize.astro";
+import HomeInitialProducts from "@components/HomeInitialProducts.astro";
 ---
 
-<Layout title="Solution Estructuras" isHome />
+<Layout title="Solution Estructuras" isHome>
+  <!-- Primeros productos  -->
+  <SectionResize>
+    <HomeInitialProducts />
+  </SectionResize>
+</Layout>

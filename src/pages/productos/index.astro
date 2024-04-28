@@ -1,5 +1,11 @@
 ---
+import SectionResize from "@/components/SectionResize.astro";
 import Layout from "@/layouts/Layout.astro";
+import { ProductsSection } from "@react/ProductsSection";
 ---
 
-<Layout title="Solution Estructuras" />
+<Layout title="Solution Estructuras">
+  <SectionResize>
+    <ProductsSection />
+  </SectionResize>
+</Layout>

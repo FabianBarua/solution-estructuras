@@ -1,9 +1,10 @@
 ---
 import Instagram from "@icons/Instagram.astro";
-import Logo from "./Logo.astro";
-import Facebook from "./icons/Facebook.astro";
-import Whatsapp from "./icons/Whatsapp.astro";
-import Pin from "./icons/Pin.astro";
+import Logo from "@components/Logo.astro";
+import Facebook from "@icons/Facebook.astro";
+import Whatsapp from "@icons/Whatsapp.astro";
+import Pin from "@icons/Pin.astro";
+import Contact from "@components/Contact.astro";
 
 const socialMedia = [
   {
@@ -24,6 +25,8 @@ const socialMedia = [
   },
 ];
 ---
+
+<Contact />
 
 <footer>
   <section class="my-16 flex flex-col sm:flex-row px-6 gap-5 max-w-5xl mx-auto">
@@ -61,10 +64,10 @@ const socialMedia = [
       <article>
         <b>Informaciones</b>
         <ul>
-          <li><a href="#">Sobre Nosotros</a></li>
-          <li><a href="#">Nuestros diferenciales</a></li>
-          <li><a href="#">Nuestros Productos</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="/#sobre-nosotros">Sobre Nosotros</a></li>
+          <li><a href="/#nuestro-diferencial">Nuestros diferenciales</a></li>
+          <li><a href="/productos">Nuestros Productos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
       </article>
     </div>

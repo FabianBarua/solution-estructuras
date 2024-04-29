@@ -32,7 +32,7 @@ const { title, isHome } = Astro.props;
       crossorigin
     />
   </head>
-  <body class="font-rubik min-h-dvh no-scrollbar flex flex-col text-white">
+  <body class="font-rubik min-h-dvh no-scrollbar flex flex-col">
     <HeaderHome isHome={isHome || false} />
     <main class="flex-1">
       <slot />
@@ -53,5 +53,16 @@ const { title, isHome } = Astro.props;
         background-color: black;
       }
     </style>
+    <script>
+      document.addEventListener("astro:before-swap", (ev) => {
+        const isHome = window.location.pathname === "/";
+
+        if (isHome && ev.newDocument.getElementById("homeInitial") === null) {
+          const headerLayout = ev.newDocument.querySelector("header");
+          headerLayout.style.animation =
+            "headerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)";
+        }
+      });
+    </script>
   </body>
 </html>

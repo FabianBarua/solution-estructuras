@@ -4,8 +4,8 @@ import Layout from "@/layouts/Layout.astro";
 import { ProductsSection } from "@react/ProductsSection";
 ---
 
-<Layout title="Solution Estructuras">
+<Layout title="Buscando productos 🔍">
   <SectionResize>
-    <ProductsSection />
+    <ProductsSection client:load />
   </SectionResize>
 </Layout>

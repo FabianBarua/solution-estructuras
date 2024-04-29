@@ -18,7 +18,7 @@ const { isHome }: Props = Astro.props;
   transition:animate="none"
   class={`w-full text-white py-12 bg-customOrange-500 transition-all flex flex-col  items-center sm:rounded-b-[100px]  `}
 >
-  <nav class="w-full max-w-5xl flex justify-between items-center p-6 lg:p-0">
+  <nav class="w-full max-w-5xl flex justify-between items-center p-6 xl:p-0">
     <a href="/">
       <Logo />
     </a>
@@ -122,6 +122,19 @@ const { isHome }: Props = Astro.props;
     }
   }
 
+  @keyframes headerOut {
+    from {
+      height: 466px;
+      border-bottom-right-radius: 260px;
+      border-bottom-left-radius: 260px;
+    }
+    to {
+      height: 146px;
+      border-bottom-right-radius: 100px;
+      border-bottom-left-radius: 100px;
+    }
+  }
+
   @media (max-width: 1024px) {
     #headerHome {
       border-bottom-right-radius: 100px;
@@ -143,6 +156,19 @@ const { isHome }: Props = Astro.props;
         height: 466px;
         border-bottom-right-radius: 100px;
         border-bottom-left-radius: 100px;
+      }
+    }
+
+    @keyframes headerOut {
+      from {
+        height: 466px;
+        border-bottom-right-radius: 100px;
+        border-bottom-left-radius: 100px;
+      }
+      to {
+        height: 196px;
+        border-bottom-right-radius: 50px;
+        border-bottom-left-radius: 50px;
       }
     }
   }

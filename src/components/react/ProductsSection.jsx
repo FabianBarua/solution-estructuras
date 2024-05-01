@@ -63,14 +63,22 @@ const CategoryMoreSearched = ({ initialCategories, setCategoriesParams }) => {
 
   useEffect(() => {
     const activeCategories = sortedCategories.filter(category => category.active).map(category => category.id).join('-') || ''
-    setCategoriesParams({
-      categories: activeCategories,
-      newPage: firstRender.current ? null : 1
-    })
-    firstRender.current = false
-  }, [
-    categoriesState
-  ])
+    if (activeCategories !== '') {
+      const newPage = firstRender.current ? null : 1
+      setCategoriesParams({
+        categories: activeCategories,
+        newPage
+      })
+      firstRender.current = false
+    } else {
+      if (!firstRender.current) {
+        setCategoriesParams({
+          categories: activeCategories,
+          page: 1
+        })
+      }
+    }
+  }, [categoriesState])
 
   const toggleClick = ({ id }) => {
     const newCategories = sortedCategories.map(category => {
@@ -101,7 +109,7 @@ const CategoryMoreSearched = ({ initialCategories, setCategoriesParams }) => {
         {
                     sortedCategories.map((category) => (
                       <li key={category.id} className=' relative w-full'>
-                        <button onClick={() => { toggleClick({ id: category?.id }) }} className={` ${category?.active ? activeClass : inactiveClass} border w-full px-4 py-1 rounded-xl  transition-all  `}>
+                        <button onClick={() => { toggleClick({ id: category?.id }) }} className={` ${category?.active ? activeClass : inactiveClass} border truncate w-full px-4 py-1 rounded-xl  transition-all  `}>
                           {category.name}
                           {
                                     category?.active && (
@@ -142,15 +150,14 @@ const ProductCard = ({ id, shortName, imageUrl, price, index }) => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
       key={id}
-      className='w-full hover:-translate-y-1 transition-all   border border-transparent hover:border-customOrange-500 relative  p-4 h-full max-w-44  overflow-hidden rounded-[20px] bg-white'
+      className='w-full  pb-5 hover:-translate-y-1 transition-all   border  border-transparent hover:border-customOrange-500 relative  p-4  h-full max-w-44  overflow-hidden rounded-[20px] bg-white'
     >
       <a id='productImage' href={`/productos/${id}`}>
         <Image src={imageUrl} radius='' className='   white rounded-2xl  h-36  object-scale-down ' onError={replaceImage} />
       </a>
-      <p className=' leading-4'>{shortName}</p>
-      <div className='flex justify-between items-center'>
-        <p className='text-sm text-gray-500'>Desde ${price}</p>
-        <div />
+      <p className=' leading-4 mt-1'>{shortName}</p>
+      <div className='flex justify-between items-center mt-1'>
+        <p className='text-sm text-gray-500  leading-4 '>Desde {price}₲ </p>
       </div>
       <a
         id='linkToProduct'
@@ -168,7 +175,7 @@ const ProductsDisplay = ({ products }) => {
     <div className=' mt-4 w-full '>
       <GridResponsive size='large'>
         {products?.map((product, i) => (
-          <li key={i} className=' w-full  flex justify-center items-center'>
+          <li key={i} className=' w-full  transition-all h-full flex justify-center items-center'>
             <ProductCard
               index={i + 1}
               id={product.id}
@@ -230,13 +237,18 @@ export const ProductsSection = ({ initialCategories, initialParams, initialProdu
     } else if (params.page > 1) {
       currentParams.set(ALL_PARAMS.page, params.page)
     }
-    window.history.pushState({}, '', `${window.location.pathname}?${currentParams.toString()}`)
+
+    const newUrl = `${window.location.pathname}?${currentParams.toString()}`
+
+    if (window.location.search !== currentParams.toString()) {
+      window.history.pushState({}, '', newUrl)
+    }
+
     searchDebounced()
   }, [params])
 
   // metodos para setear
   const setSort = (sort) => {
-    console.log(sort)
     setParams((prevParams) => {
       const newParams = {
         ...prevParams,
@@ -263,7 +275,7 @@ export const ProductsSection = ({ initialCategories, initialParams, initialProdu
       const newParams = {
         ...prevParams,
         categories,
-        page: newPage || info.currentPage
+        page: newPage || 1
       }
       return newParams
     })

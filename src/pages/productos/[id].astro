@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { db, eq, Products } from "astro:db";
+
+const id = parseInt(Astro.params.id) || 0;
+const whereOptions = eq(Products.id, id);
+
+const [product] = await db.select().from(Products).where(whereOptions);
+
+if (!product) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title={product.name}> teste </Layout>

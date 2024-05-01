@@ -44,12 +44,10 @@ export const getParams = () => {
   const categoryParameter = searchParams.get(ALL_PARAMS.categories) || null
   const pageParameter = searchParams.get(ALL_PARAMS.page) || null
   const allInUrl = searchParams.toString()
-  console.log(allInUrl)
   return { searchParameter, categoryParameter, pageParameter, allInUrl }
 }
 
 export async function getProductsWithParams ({ params, url = null }) {
-  console.log(url)
   const urlSearchParams = new URLSearchParams()
   urlSearchParams.append(ALL_PARAMS.search, params?.search)
   urlSearchParams.append(ALL_PARAMS.categories, params?.categories)

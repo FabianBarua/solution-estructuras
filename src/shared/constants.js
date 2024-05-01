@@ -31,7 +31,7 @@ export const ALL_SORTS = [
   }
 ]
 
-export const MAX_PER_PAGE = 10
+export const MAX_PER_PAGE = 20
 
 export const ALL_PARAMS = {
   search: 'busqueda',

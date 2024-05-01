@@ -1,8 +1,8 @@
-import { Input, Select, SelectSection, SelectItem, Image } from '@nextui-org/react'
+import { Input, Select, SelectSection, SelectItem, Image, Pagination } from '@nextui-org/react'
 
 import '@react/ProductsSection.css'
 import { SearchIcon } from '@icons/SearchIcon'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MagicMotion } from 'react-magic-motion'
 import { GridResponsive } from '@react/GridResponsive'
@@ -47,9 +47,11 @@ const HeaderSearch = ({ setSort, handleSearch, inputValue, sortValue }) => {
 }
 
 const CategoryMoreSearched = ({ initialCategories, setCategoriesParams }) => {
-  const [categories, setCategoriesState] = useState([...initialCategories])
+  const [categoriesState, setCategoriesState] = useState([...initialCategories])
+  const firstRender = useRef(true)
 
-  categories.sort((a, b) => {
+  const sortedCategories =
+  [...categoriesState].sort((a, b) => {
     if (a.active && !b.active) {
       return -1
     } else if (!a.active && b.active) {
@@ -60,13 +62,18 @@ const CategoryMoreSearched = ({ initialCategories, setCategoriesParams }) => {
   })
 
   useEffect(() => {
-    setCategoriesParams(categories.filter(category => category.active).map(category => category.id).join('-') || '')
+    const activeCategories = sortedCategories.filter(category => category.active).map(category => category.id).join('-') || ''
+    setCategoriesParams({
+      categories: activeCategories,
+      newPage: firstRender.current ? null : 1
+    })
+    firstRender.current = false
   }, [
-    categories
+    categoriesState
   ])
 
   const toggleClick = ({ id }) => {
-    const newCategories = categories.map(category => {
+    const newCategories = sortedCategories.map(category => {
       if (category.id === id) {
         return {
           ...category,
@@ -92,7 +99,7 @@ const CategoryMoreSearched = ({ initialCategories, setCategoriesParams }) => {
       <ul className=' place-self-center place-items-center place-content-center placecenter  mt-4 gap-2 grid grid-cols-[repeat(auto-fit,_minmax(8rem,_1fr))]   '>
 
         {
-                    categories.map((category) => (
+                    sortedCategories.map((category) => (
                       <li key={category.id} className=' relative w-full'>
                         <button onClick={() => { toggleClick({ id: category?.id }) }} className={` ${category?.active ? activeClass : inactiveClass} border w-full px-4 py-1 rounded-xl  transition-all  `}>
                           {category.name}
@@ -124,9 +131,15 @@ const CategoryMoreSearched = ({ initialCategories, setCategoriesParams }) => {
   )
 }
 
-const ProductCard = ({ id, shortName, imageUrl, price }) => {
+const ProductCard = ({ id, shortName, imageUrl, price, index }) => {
   return (
-    <article className='w-full hover:-translate-y-1 transition-all   border border-transparent hover:border-customOrange-500 relative  p-4 h-full max-w-44  overflow-hidden rounded-[20px] bg-white'>
+    <motion.article
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
+      key={id}
+      className='w-full hover:-translate-y-1 transition-all   border border-transparent hover:border-customOrange-500 relative  p-4 h-full max-w-44  overflow-hidden rounded-[20px] bg-white'
+    >
       <a id='productImage' href={`/productos/${id}`}>
         <Image src={imageUrl} radius='' className='   white rounded-2xl  h-36  object-scale-down ' />
       </a>
@@ -142,17 +155,18 @@ const ProductCard = ({ id, shortName, imageUrl, price }) => {
       >
         <Arrow />
       </a>
-    </article>
+    </motion.article>
   )
 }
 
 const ProductsDisplay = ({ products }) => {
   return (
-    <div className=' mt-4'>
-      <GridResponsive>
+    <div className=' mt-4 w-full '>
+      <GridResponsive size='large'>
         {products?.map((product, i) => (
-          <li key={i} className='  w-full  flex justify-center items-center'>
+          <li key={i} className=' w-full  flex justify-center items-center'>
             <ProductCard
+              index={i + 1}
               id={product.id}
               shortName={product.shortName}
               imageUrl={product.imageUrl}
@@ -165,9 +179,26 @@ const ProductsDisplay = ({ products }) => {
 
   )
 }
+const NotFound = ({ search }) => {
+  return (
+    <div className=' mt-8 relative overflow-hidden flex  justify-center items-center text-white  p-12 bg-customBlue-600 rounded-xl border border-customBlue-500'>
+      <div className=' w-full flex justify-center flex-col max-w-72 text-2xl'>
+        <h1 className=' font-light '>Ningún resultado para </h1>
+        <span className=' font-medium text-customOrange-400 truncate'>"{search}"</span>
+        <p className=' font-medium leading-6 mt-2 text-3xl'>Intenta de nuevo con otro término.</p>
+      </div>
+      <motion.img
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        src='/images/arrow404.png' className=' w-32 h-auto ' alt=''
+      />
+    </div>
+  )
+}
 
-export const ProductsSection = ({ initialCategories, initialParams }) => {
-  const [params, setParams] = useState(initialParams || {})
+export const ProductsSection = ({ initialCategories, initialParams, initialProducts }) => {
+  const [params, setParams] = useState(initialParams)
 
   useEffect(() => {
     const currentParams = new URLSearchParams(window.location.search)
@@ -215,18 +246,30 @@ export const ProductsSection = ({ initialCategories, initialParams }) => {
     setParams((prevParams) => {
       const newParams = {
         ...prevParams,
-        search: value
+        search: value,
+        page: 1
       }
 
       return newParams
     })
   }
 
-  const setCategories = (categories) => {
+  const setCategories = ({ categories, newPage }) => {
     setParams((prevParams) => {
       const newParams = {
         ...prevParams,
-        categories
+        categories,
+        page: newPage || info.currentPage
+      }
+      return newParams
+    })
+  }
+  const setPage = (page) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setParams((prevParams) => {
+      const newParams = {
+        ...prevParams,
+        page
       }
       return newParams
     })
@@ -238,32 +281,53 @@ export const ProductsSection = ({ initialCategories, initialParams }) => {
   }))
 
   const { products, getProducts, info } = useProducts({
+    initialProducts,
     params
   })
 
   const searchDebounced = useDebouncedCallback(() => {
-    getProducts()
+    getProducts({ params })
   }, 500)
 
   const handleSearch = (event) => {
     const value = event.target.value
     setSearch(value)
   }
-  const handleLoadMore = () => {
-    console.log(info)
-    if (info.nextUrl) {
-      // cargar mas
-    }
-  }
 
   return (
     <>
       <HeaderSearch setSort={setSort} handleSearch={handleSearch} inputValue={initialParams?.search} sortValue={initialParams?.sortID} />
       <CategoryMoreSearched setCategoriesParams={setCategories} initialCategories={initialCategoriesActives} />
-      <ProductsDisplay products={products} />
-      <div className=' w-full flex'>
-        <button onClick={handleLoadMore} className=' my-4 p-4 rounded-xl bg-white mx-auto'>Cargar mas</button>
+      <div className=' h-full  flex flex-col justify-center  items-center'>
+        <ProductsDisplay products={products} />
+        {
+          info?.totalPages === 0 && (
+            <NotFound
+              search={params?.search}
+            />
+          )
+        }
+        <MagicMotion>
+          <div className={` w-full ${info?.totalPages > 0 ? 'flex' : 'hidden'}   justify-center items-center py-6`}>
 
+            <Pagination
+              classNames={
+                {
+                  item: '  hover:bg-customOrange-500',
+                  cursor: 'bg-customOrange-500   text-white'
+                }
+              }
+              loop
+              boundaries={3}
+              showControls
+              total={info.totalPages}
+              onChange={setPage}
+              initialPage={info.currentPage}
+              page={info.currentPage}
+            />
+
+          </div>
+        </MagicMotion>
       </div>
     </>
   )

@@ -1,5 +1,12 @@
 ---
+import { ALL_PARAMS } from "@/shared/constants";
+import { getCategories } from "@/shared/services/estructuras";
+const { categories } = await getCategories({
+  limit: null,
+  url: Astro.url.origin,
+});
 
+console.log(categories);
 ---
 
 <label
@@ -27,32 +34,26 @@
   class="peer"
   hidden
 />
-<ul
-  id="box"
-  class="  top-8 flex-col absolute bg-customOrange-700 rounded-xl w-full p-1 text-sm"
->
-  <li
-    class="truncate text-center rounded-lg bg-transparent transition-all hover:bg-black/40 h-min"
+<div class="relative" id="box">
+  <ul
+    class="top-8 z-50 absolute flex-col bg-customOrange-700 rounded-xl w-full p-1 text-sm"
   >
-    <a href="/" class="">
-      <p class="p-1 truncate">Test</p>
-    </a>
-  </li>
-  <li
-    class="truncate text-center rounded-lg bg-transparent transition-all hover:bg-black/40 h-min"
-  >
-    <a href="/" class="">
-      <p class="p-1 truncate">Test</p>
-    </a>
-  </li>
-  <li
-    class="  truncate text-center rounded-lg bg-transparent transition-all hover:bg-black/40 h-min"
-  >
-    <a href="/" class="">
-      <p class="p-1 truncate">Test</p>
-    </a>
-  </li>
-</ul>
+    {
+      categories.map((category) => {
+        return (
+          <li class="truncate relative z-50 text-center rounded-lg bg-transparent transition-all hover:bg-black/40 h-min">
+            <a
+              href={`/productos/?${ALL_PARAMS.categories}=${category.id}`}
+              class=""
+            >
+              <p class="p-1 truncate">{category.name}</p>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>
 
 <style>
   #box {

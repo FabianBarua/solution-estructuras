@@ -132,6 +132,10 @@ const CategoryMoreSearched = ({ initialCategories, setCategoriesParams }) => {
 }
 
 const ProductCard = ({ id, shortName, imageUrl, price, index }) => {
+  const replaceImage = (error) => {
+    error.target.src = '/images/andamioWhite.jpg'
+  }
+
   return (
     <motion.article
       initial={{ y: 20, opacity: 0 }}
@@ -141,7 +145,7 @@ const ProductCard = ({ id, shortName, imageUrl, price, index }) => {
       className='w-full hover:-translate-y-1 transition-all   border border-transparent hover:border-customOrange-500 relative  p-4 h-full max-w-44  overflow-hidden rounded-[20px] bg-white'
     >
       <a id='productImage' href={`/productos/${id}`}>
-        <Image src={imageUrl} radius='' className='   white rounded-2xl  h-36  object-scale-down ' />
+        <Image src={imageUrl} radius='' className='   white rounded-2xl  h-36  object-scale-down ' onError={replaceImage} />
       </a>
       <p className=' leading-4'>{shortName}</p>
       <div className='flex justify-between items-center'>

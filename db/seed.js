@@ -1,327 +1,71 @@
 import { db, Products, Categories } from 'astro:db'
 
-export default async function () {
-  await db.insert(Categories).values([
-    { id: 1, name: 'Andamios' },
-    { id: 2, name: 'Electronicos' },
-    { id: 3, name: 'Muebles' },
-    { id: 4, name: 'Escalables' },
-    { id: 5, name: 'Ferreteria' }
-  ])
-
-  await db.insert(Products).values([
-    {
-      id: 1,
-      name: 'Andamio con soporte de 2.5m',
-      shortName: 'Andamio',
-      price: 100,
-      description: 'Description 1',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 1,
-      showAtHome: true
-    },
-    {
-      id: 2,
-      name: 'Martillo de 3kg',
-      shortName: 'Martillo',
-      price: 160,
-      description: 'Description 2',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 5,
-      showAtHome: false
-    },
-    {
-      id: 3,
-      name: 'Mesa de madera',
-      shortName: 'Mesa',
-      price: 200,
-      description: 'Description 3',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 3,
-      showAtHome: true
-    },
-    {
-      id: 4,
-      name: 'Escalera de 5m',
-      shortName: 'Escalera',
-      price: 250,
-      description: 'Description 4',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 4,
-      showAtHome: false
-    },
-    {
-      id: 5,
-      name: 'Taladro inalambrico',
-      shortName: 'Taladro',
-      price: 300,
-      description: 'Description 5',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 2,
-      showAtHome: true
-    },
-    {
-      id: 6,
-      name: 'Andamio con soporte de 2.5m',
-      shortName: 'Andamio',
-      price: 100,
-      description: 'Description 1',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 1,
-      showAtHome: false
-    },
-    {
-      id: 7,
-      name: 'Martillo de 1kg',
-      shortName: 'Martillo',
-      price: 140,
-      description: 'Description 2',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 5,
-      showAtHome: true
-    },
-    {
-      id: 8,
-      name: 'Mesa de madera',
-      shortName: 'Mesa',
-      price: 200,
-      description: 'Description 3',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 3,
-      showAtHome: false
-    },
-    {
-      id: 9,
-      name: 'Escalera de 5m',
-      shortName: 'Escalera',
-      price: 250,
-      description: 'Description 4',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 4,
-      showAtHome: true
-    },
-    {
-      id: 10,
-      name: 'Taladro inalambrico',
-      shortName: 'Taladro',
-      price: 300,
-      description: 'Description 5',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 2,
-      showAtHome: false
-    },
-    {
-      id: 11,
-      name: 'Andamio con soporte de 2.5m',
-      shortName: 'Andamio',
-      price: 100,
-      description: 'Description 1',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 1,
-      showAtHome: false
-    },
-    {
-      id: 12,
-      name: 'Martillo de 2kg',
-      shortName: 'Martillo',
-      price: 150,
-      description: 'Description 2',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 5,
-      showAtHome: false
-    },
-    {
-      id: 13,
-      name: 'Mesa de madera',
-      shortName: 'Mesa',
-      price: 200,
-      description: 'Description 3',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 3,
-      showAtHome: false
-    },
-    {
-      id: 14,
-      name: 'Escalera de 5m',
-      shortName: 'Escalera',
-      price: 250,
-      description: 'Description 4',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'https://example.com/image.jpg',
-      categoryId: 4,
-      showAtHome: false
-    },
-    {
-      id: 15,
-      name: 'Sierra Circular',
-      shortName: 'Sierra',
-      price: 180,
-      description: 'Descripción de la sierra circular',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de sierra circular',
-      categoryId: 2,
-      showAtHome: false
-    },
-    {
-      id: 16,
-      name: 'Silla Ergonómica',
-      shortName: 'Silla',
-      price: 120,
-      description: 'Descripción de la silla ergonómica',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de silla ergonómica',
-      categoryId: 3,
-      showAtHome: false
-    },
-    {
-      id: 17,
-      name: 'Taladro de Impacto',
-      shortName: 'Taladro',
-      price: 250,
-      description: 'Descripción del taladro de impacto',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de taladro de impacto',
-      categoryId: 2,
-      showAtHome: false
-    },
-    {
-      id: 18,
-      name: 'Cama King Size',
-      shortName: 'Cama',
-      price: 800,
-      description: 'Descripción de la cama King Size',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de cama King Size',
-      categoryId: 3,
-      showAtHome: false
-    },
-    {
-      id: 19,
-      name: 'Llave de Trinquete',
-      shortName: 'Llave',
-      price: 30,
-      description: 'Descripción de la llave de trinquete',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de llave de trinquete',
-      categoryId: 5,
-      showAtHome: false
-    },
-    {
-      id: 20,
-      name: 'Sofá de Cuero',
-      shortName: 'Sofá',
-      price: 650,
-      description: 'Descripción del sofá de cuero',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de sofá de cuero',
-      categoryId: 3,
-      showAtHome: false
-    },
-    {
-      id: 21,
-      name: 'Destornillador de Precisión',
-      shortName: 'Destornillador',
-      price: 15,
-      description: 'Descripción del destornillador de precisión',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de destornillador de precisión',
-      categoryId: 5,
-      showAtHome: false
-    },
-    {
-      id: 22,
-      name: 'Armario de Almacenamiento',
-      shortName: 'Armario',
-      price: 300,
-      description: 'Descripción del armario de almacenamiento',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de armario de almacenamiento',
-      categoryId: 3,
-      showAtHome: false
-    },
-    {
-      id: 23,
-      name: 'Pistola de Pintura',
-      shortName: 'Pistola',
-      price: 120,
-      description: 'Descripción de la pistola de pintura',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de pistola de pintura',
-      categoryId: 4,
-      showAtHome: false
-    },
-    {
-      id: 24,
-      name: 'Cinta Métrica',
-      shortName: 'Cinta',
-      price: 10,
-      description: 'Descripción de la cinta métrica',
-      imageUrl: '/images/andamioWhite.jpg',
-      imageUrl2: '/images/andamioWhite.jpg',
-      imageUrl3: '/images/andamioWhite.jpg',
-      imageAlt: 'Imagen de cinta métrica',
-      categoryId: 5,
-      showAtHome: false
+const getCategories = async () => {
+  const res = await fetch('https://api.escuelajs.co/api/v1/categories')
+  const data = await res.json()
+  const categoriesJson = data.slice(0, 5).map((category, index) => {
+    return {
+      id: category.id,
+      name: category.name
     }
+  }
+  )
+  return categoriesJson
+}
 
-  ])
+// get 10 products for each category
+const products = async ({ categories }) => {
+  const products = await Promise.all(
+    categories.map(async (category) => {
+      const res = await fetch(`https://api.escuelajs.co/api/v1/products/?categoryId=${category.id}&offset=0&limit=10`)
+      const data = await res.json()
+
+      const fixImageUrl = (url) => {
+        // algunas url estan mal, ejemplo src="["https://i.imgur.com/w3Y8NwQ.jpeg"]"
+
+        if (url && url.includes('["')) {
+          const fixedUrl = url.replace('["', '').replace('"]', '')
+          return fixedUrl
+        }
+
+        return url
+      }
+
+      const productsJson = data.map((product) => {
+        return {
+          id: product.id,
+          name: product.title,
+          shortName: product.title.split(' ')[0],
+          price: product.price,
+          description: product.description,
+          imageUrl: fixImageUrl(product.images[0]) || null,
+          imageUrl2: fixImageUrl(product.images[1]) || null,
+          imageUrl3: fixImageUrl(product.images[2]) || null,
+          imageAlt: fixImageUrl(product.images[0]) || null,
+          categoryId: category.id,
+          showAtHome: false
+        }
+      }
+      )
+      return productsJson
+    }
+    )
+  )
+
+  const productsArray = products.flat()
+
+  return productsArray
+}
+
+export default async function () {
+  const categories = await getCategories()
+  const productsArray = await products({ categories })
+
+  await db.insert(Categories).values(
+    categories
+  )
+
+  await db.insert(Products).values(
+    productsArray
+  )
 }

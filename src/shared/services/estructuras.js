@@ -1,7 +1,7 @@
 import { ALL_PARAMS } from '../constants'
 
-export const getCategories = async ({ limit }) => {
-  const searchParams = new URLSearchParams(window.location.search)
+export const getCategories = async ({ limit, url = null }) => {
+  const searchParams = new URLSearchParams()
   searchParams.set('limit', limit)
 
   const options = {
@@ -11,8 +11,7 @@ export const getCategories = async ({ limit }) => {
     }
   }
 
-  const response = await fetch('/api/products/categories?' + searchParams.toString(), options)
-
+  const response = await fetch(url + '/api/categorias?' + searchParams.toString(), options)
   const data = await response.json()
 
   return data

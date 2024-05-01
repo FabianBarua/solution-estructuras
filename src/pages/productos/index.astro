@@ -4,33 +4,9 @@ import Layout from "@/layouts/Layout.astro";
 import { ALL_PARAMS, ALL_SORTS } from "@/shared/constants";
 import { ProductsSection } from "@react/ProductsSection";
 
-const initialCategories = [
-  {
-    id: 1,
-    name: "Categoria 1",
-    active: true,
-  },
-  {
-    id: 2,
-    name: "Categoria 2",
-    active: false,
-  },
-  {
-    id: 3,
-    name: "Categoria 3",
-    active: false,
-  },
-  {
-    id: 4,
-    name: "Categoria 4",
-    active: false,
-  },
-  {
-    id: 5,
-    name: "Categoria 5",
-    active: false,
-  },
-];
+import { db, Categories, Products } from "astro:db";
+
+const initialCategories = await db.select().from(Categories);
 
 let params = Astro.url.searchParams;
 

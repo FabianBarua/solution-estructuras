@@ -31,11 +31,14 @@ export const ALL_SORTS = [
   }
 ]
 
+export const MAX_PER_PAGE = 10
+
 export const ALL_PARAMS = {
   search: 'busqueda',
   categories: 'categoria',
   page: 'pagina',
-  sortID: 'orden'
+  sortID: 'orden',
+  limit: 'limite'
 }
 
 export const testProducts = {

@@ -155,7 +155,7 @@ const ProductsDisplay = ({ products }) => {
             <ProductCard
               id={product.id}
               shortName={product.shortName}
-              imageUrl={product.imgUrl}
+              imageUrl={product.imageUrl}
               price={product.price}
             />
           </li>
@@ -171,7 +171,10 @@ export const ProductsSection = ({ initialCategories, initialParams }) => {
 
   useEffect(() => {
     const currentParams = new URLSearchParams(window.location.search)
-    if (params.search) {
+
+    if (params.search === '') {
+      currentParams.delete(ALL_PARAMS.search)
+    } else if (params.search) {
       currentParams.set(ALL_PARAMS.search, params.search)
     }
 
@@ -181,13 +184,19 @@ export const ProductsSection = ({ initialCategories, initialParams }) => {
       currentParams.set(ALL_PARAMS.sortID, params.sortID)
     }
 
-    if (params.categories) {
+    if (params.categories === '') {
+      currentParams.delete(ALL_PARAMS.categories)
+    } else if (params.categories) {
       currentParams.set(ALL_PARAMS.categories, params.categories)
     }
-    if (params.page) {
+
+    if (params.page === 1) {
+      currentParams.delete(ALL_PARAMS.page)
+    } else if (params.page > 1) {
       currentParams.set(ALL_PARAMS.page, params.page)
     }
     window.history.pushState({}, '', `${window.location.pathname}?${currentParams.toString()}`)
+    searchDebounced()
   }, [params])
 
   // metodos para setear
@@ -228,7 +237,7 @@ export const ProductsSection = ({ initialCategories, initialParams }) => {
     active: initialParams?.categories?.split('-').includes(category.id.toString())
   }))
 
-  const { products, getProducts } = useProducts({
+  const { products, getProducts, info } = useProducts({
     params
   })
 
@@ -239,7 +248,12 @@ export const ProductsSection = ({ initialCategories, initialParams }) => {
   const handleSearch = (event) => {
     const value = event.target.value
     setSearch(value)
-    searchDebounced()
+  }
+  const handleLoadMore = () => {
+    console.log(info)
+    if (info.nextUrl) {
+      // cargar mas
+    }
   }
 
   return (
@@ -247,7 +261,10 @@ export const ProductsSection = ({ initialCategories, initialParams }) => {
       <HeaderSearch setSort={setSort} handleSearch={handleSearch} inputValue={initialParams?.search} sortValue={initialParams?.sortID} />
       <CategoryMoreSearched setCategoriesParams={setCategories} initialCategories={initialCategoriesActives} />
       <ProductsDisplay products={products} />
+      <div className=' w-full flex'>
+        <button onClick={handleLoadMore} className=' my-4 p-4 rounded-xl bg-white mx-auto'>Cargar mas</button>
 
+      </div>
     </>
   )
 }

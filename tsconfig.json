@@ -11,6 +11,7 @@
       "@pages/*": ["src/pages/*"],
       "@icons/*": ["src/components/icons/*"],
       "@layouts/*": ["src/layouts/*"],
+      "@db/*": ["db/*"],
     }
   }
 }

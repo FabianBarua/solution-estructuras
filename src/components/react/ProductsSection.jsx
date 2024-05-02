@@ -161,7 +161,7 @@ const ProductCard = ({ id, shortName, imageUrl, price, index }) => {
       </div>
       <a
         id='linkToProduct'
-        class='bg-customOrange-500  hover:bg-customOrange-300   absolute  z-30  -bottom-7 rotate-90 -right-[1.2rem] transition-all hover:scale-110 rounded-tl-[30px] rounded-bl-[35px] p-4 flex items-end rounded-br-[30px] size-[70px]'
+        className='bg-customOrange-500  hover:bg-customOrange-300   absolute  z-30  -bottom-7 rotate-90 -right-[1.2rem] transition-all hover:scale-110 rounded-tl-[30px] rounded-bl-[35px] p-4 flex items-end rounded-br-[30px] size-[70px]'
         href={`/productos/${id}`}
       >
         <Arrow />

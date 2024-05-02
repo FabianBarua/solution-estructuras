@@ -12,6 +12,7 @@ const Categories = defineTable({
 const Products = defineTable({
   columns: {
     id: column.number({ primaryKey: true, optional: false, unique: true }),
+    sku: column.text({ optional: true }),
     name: column.text({ optional: false }),
     shortName: column.text({ optional: true }),
     price: column.number({ optional: false }),

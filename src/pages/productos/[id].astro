@@ -51,7 +51,7 @@ if (!product) {
 
 <Layout title={product.name}>
   <SectionResize className=" flex flex-col  ">
-    <div class="flex justify-between w-full">
+    <div class="flex flex-col sm:flex-row justify-between w-full">
       <div class="w-full flex justify-center py-12 items-center">
         <motion.div
           client:load
@@ -69,10 +69,10 @@ if (!product) {
           >
             <Search />
           </div>
-          <ImageCarrousel productImages={productImages} />
+          <ImageCarrousel client:load productImages={productImages} />
         </motion.div>
       </div>
-      <div class="w-full max-w-lg p-12 text-white">
+      <div class="w-full max-w-lg p-3 sm:p-12 text-white">
         {
           product?.name && (
             <h1 class=" text-3xl leading-6 font-medium">{product.name}</h1>

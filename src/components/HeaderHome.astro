@@ -1,22 +1,24 @@
 ---
 import Logo from "@components/Logo.astro";
-import CategoriesSelect from "@components/CategoriesSelect.astro";
 import Whatsapp from "@icons/Whatsapp.astro";
 import HomeArticle from "@components/HomeArticle.astro";
 import CallToAction from "@/components/CallToAction.astro";
+import { db, Products } from "astro:db";
 
 interface Props {
   isHome?: boolean;
 }
 
+const products = await db.select().from(Products).offset(0).limit(2);
+
 const { isHome }: Props = Astro.props;
 ---
 
 <header
-  id={isHome ? "headerHome" : "headerLayout"}
+  id={"headerLayout"}
   transition:name="header"
   transition:animate="none"
-  class={`w-full text-white py-12 bg-customOrange-500 transition-all flex flex-col  items-center sm:rounded-b-[100px]  `}
+  class={`w-full text-white py-12 bg-customOrange-500 transition-all flex flex-col  items-center  ${isHome ? " rounded-b-[100px] " : " rounded-b-[50px] sm:rounded-b-[100px]"}  `}
 >
   <nav class="w-full max-w-5xl flex justify-between items-center p-6 xl:p-0">
     <a href="/">
@@ -46,22 +48,27 @@ const { isHome }: Props = Astro.props;
       <div
         id="homeInitial"
         transition:animate="none"
-        class=" z-0 p-6 lg:p-0 pointer-events-none relative    sm:my-12 w-full max-w-5xl  justify-center gap-20 mx-auto "
+        class=" h-[350px] flex z-0 p-6 lg:p-0 pointer-events-none relative w-full max-w-5xl  justify-center gap-20 mx-auto "
       >
-        <div class="  lg:block hidden w-full max-w-96 h-56 relative">
-          <div class=" absolute  right-20 -bottom-12 -rotate-12  scale-75">
+        <div class="  h-full  justify-center items-center lg:flex hidden w-full max-w-96  relative">
+          <div class=" absolute  right-20 -bottom-3 -rotate-12  scale-75">
             <HomeArticle
               visibility={100}
-              title="Poste"
-              id={2}
-              image="/images/poste.png"
+              title={products[0].shortName}
+              id={products[0].id}
+              image={products[0].imageUrl}
             />
           </div>
           <div class=" absolute right-0 rotate-[-4.45deg]">
-            <HomeArticle title="Andamio" id={1} image="/images/andamio.png" />
+            <HomeArticle
+              visibility={100}
+              title={products[1].shortName}
+              id={products[1].id}
+              image={products[1].imageUrl}
+            />
           </div>
         </div>
-        <div>
+        <div class=" flex justify-center  flex-col">
           <p class=" text-[18px] pointer-events-none opacity-50">
             Desde 1980 para vos
           </p>
@@ -80,98 +87,19 @@ const { isHome }: Props = Astro.props;
 
 <style>
   #homeInitial {
-    animation: slideIn 0.5s ease-in;
-    display: flex;
+    animation: slideIn 1s forwards;
   }
-  #headerHome {
-    animation: headerIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-    height: 466px;
-    border-bottom-right-radius: 260px;
-    border-bottom-left-radius: 260px;
-  }
-
-  #headerLayout {
-    border-bottom-right-radius: 100px;
-    border-bottom-left-radius: 100px;
-  }
-
   @keyframes slideIn {
     0% {
       opacity: 0;
     }
-
     50% {
       opacity: 0;
-      transform: translateY(30%);
-      display: none;
+      transform: translateY(10%);
     }
     100% {
       opacity: 1;
-      display: flex;
-    }
-  }
-
-  @keyframes headerIn {
-    from {
-      height: 146px;
-      border-bottom-right-radius: 100px;
-      border-bottom-left-radius: 100px;
-    }
-    to {
-      height: 466px;
-      border-bottom-right-radius: 260px;
-      border-bottom-left-radius: 260px;
-    }
-  }
-
-  @keyframes headerOut {
-    from {
-      height: 466px;
-      border-bottom-right-radius: 260px;
-      border-bottom-left-radius: 260px;
-    }
-    to {
-      height: 146px;
-      border-bottom-right-radius: 100px;
-      border-bottom-left-radius: 100px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    #headerHome {
-      border-bottom-right-radius: 100px;
-      border-bottom-left-radius: 100px;
-    }
-
-    #headerLayout {
-      border-bottom-right-radius: 50px;
-      border-bottom-left-radius: 50px;
-    }
-
-    @keyframes headerIn {
-      from {
-        height: 196px;
-        border-bottom-right-radius: 50px;
-        border-bottom-left-radius: 50px;
-      }
-      to {
-        height: 466px;
-        border-bottom-right-radius: 100px;
-        border-bottom-left-radius: 100px;
-      }
-    }
-
-    @keyframes headerOut {
-      from {
-        height: 466px;
-        border-bottom-right-radius: 100px;
-        border-bottom-left-radius: 100px;
-      }
-      to {
-        height: 196px;
-        border-bottom-right-radius: 50px;
-        border-bottom-left-radius: 50px;
-      }
+      transform: translateY(0);
     }
   }
 </style>

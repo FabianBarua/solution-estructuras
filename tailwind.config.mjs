@@ -25,7 +25,9 @@ export default {
           500: '#340098',
           600: '#110032'
         },
-        content1: '#993808' // Modify the color here
+        content1: '#993808',
+        content3: '#DB500B',
+        content4: '#f3590d'
       }
     }
   },

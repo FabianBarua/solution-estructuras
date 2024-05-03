@@ -28,7 +28,7 @@ export const HomeInitialProducts = () => {
       initialProducts?.map(({ id, shortName, imageUrl }) => (
         <Skeleton key={id} isLoaded={isLoaded} className=' brand  size-[10.5rem] rounded-[34px] '>
           <li className=' size-[10.5rem] rounded-[34px]  '>
-            <ProductCard id={id} shortName={shortName} imageUrl={imageUrl} />
+            <ProductCard id={id} shortName={shortName || ''} imageUrl={imageUrl} />
           </li>
         </Skeleton>
       ))

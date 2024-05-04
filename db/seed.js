@@ -60,7 +60,17 @@ export default async function () {
   const categories = await getCategories()
   const productsArray = await products({ categories })
   // make  5 random products show at home true
-  const randomProductsIndex = Array.from({ length: 5 }, () => Math.floor(Math.random() * productsArray.length))
+
+  const randomProductsIndex = []
+
+  while (randomProductsIndex.length < 5) {
+    const randomIndex = Math.floor(Math.random() * productsArray.length)
+    if (!randomProductsIndex.includes(randomIndex)) {
+      randomProductsIndex.push(randomIndex)
+    }
+  }
+
+  console.log('randomProductsIndex', randomProductsIndex)
 
   randomProductsIndex.forEach((index) => {
     productsArray[index].showAtHome = true

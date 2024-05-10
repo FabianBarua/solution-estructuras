@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Skeleton } from '@nextui-org/react'
-import { ProductCard } from '@react/ProductCard'
+import { ProductCard } from '@/components/react/HomeProductCard'
 
 export const HomeInitialProducts = () => {
   const [initialProducts, setInitialProducts] = useState(

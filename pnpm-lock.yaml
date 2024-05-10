@@ -17,6 +17,9 @@ dependencies:
   '@astrojs/vercel':
     specifier: ^7.5.4
     version: 7.5.4(astro@4.7.0)(react@18.3.0)
+  '@nanostores/react':
+    specifier: ^0.7.2
+    version: 0.7.2(nanostores@0.10.3)(react@18.3.0)
   '@nextui-org/react':
     specifier: ^2.3.6
     version: 2.3.6(@types/react@18.3.0)(framer-motion@11.1.7)(react-dom@18.3.0)(react@18.3.0)(tailwind-variants@0.2.1)(tailwindcss@3.4.3)
@@ -38,6 +41,9 @@ dependencies:
   framer-motion:
     specifier: ^11.1.7
     version: 11.1.7(react-dom@18.3.0)(react@18.3.0)
+  nanostores:
+    specifier: ^0.10.3
+    version: 0.10.3
   next-themes:
     specifier: ^0.3.0
     version: 0.3.0(react-dom@18.3.0)(react@18.3.0)
@@ -1185,6 +1191,17 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: false
+
+  /@nanostores/react@0.7.2(nanostores@0.10.3)(react@18.3.0):
+    resolution: {integrity: sha512-e3OhHJFv3NMSFYDgREdlAQqkyBTHJM91s31kOZ4OvZwJKdFk5BLk0MLbh51EOGUz9QGX2aCHfy1RvweSi7fgwA==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      nanostores: ^0.9.0 || ^0.10.0
+      react: '>=18.0.0'
+    dependencies:
+      nanostores: 0.10.3
+      react: 18.3.0
     dev: false
 
   /@neon-rs/load@0.0.4:
@@ -7013,6 +7030,11 @@ packages:
     resolution: {integrity: sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==}
     engines: {node: ^18 || >=20}
     hasBin: true
+    dev: false
+
+  /nanostores@0.10.3:
+    resolution: {integrity: sha512-Nii8O1XqmawqSCf9o2aWqVxhKRN01+iue9/VEd1TiJCr9VT5XxgPFbF1Edl1XN6pwJcZRsl8Ki+z01yb/T/C2g==}
+    engines: {node: ^18.0.0 || >=20.0.0}
     dev: false
 
   /natural-compare@1.4.0:

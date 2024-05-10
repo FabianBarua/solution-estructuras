@@ -1,4 +1,4 @@
-import { ALL_PARAMS } from '../constants'
+import { ALL_PARAMS, ALL_SORTS } from '../constants'
 
 export const getCategories = async ({ limit, url = null }) => {
   const searchParams = new URLSearchParams()
@@ -47,6 +47,28 @@ export const getParams = () => {
   return { searchParameter, categoryParameter, pageParameter, allInUrl }
 }
 
+export const setParams = (params) => {
+  const searchParams = new URLSearchParams()
+  searchParams.set(ALL_PARAMS.search, params.search || '')
+  searchParams.set(ALL_PARAMS.categories, params.categories || '')
+  searchParams.set(ALL_PARAMS.page, params.page || 1)
+  searchParams.set(ALL_PARAMS.sortID, params.sortID || 0)
+
+  if (params.search === '') {
+    searchParams.delete(ALL_PARAMS.search)
+  }
+  if (params.categories === '') {
+    searchParams.delete(ALL_PARAMS.categories)
+  }
+  if (params.page === 1) {
+    searchParams.delete(ALL_PARAMS.page)
+  }
+  if (params.sortID === 0) {
+    searchParams.delete(ALL_PARAMS.sortID)
+  }
+  console.log(searchParams.toString())
+}
+
 export async function getProductsWithParams ({ params, url = null }) {
   const urlSearchParams = new URLSearchParams()
   urlSearchParams.append(ALL_PARAMS.search, params?.search)
@@ -60,4 +82,15 @@ export async function getProductsWithParams ({ params, url = null }) {
   const products = await res.json()
 
   return products
+}
+
+export const getParamsURL = () => {
+  const urlParams = new URLSearchParams(window.location.search)
+  const initialParams = {
+    categories: urlParams.get(ALL_PARAMS.categories) || '',
+    search: urlParams.get(ALL_PARAMS.search) || '',
+    page: parseInt(urlParams.get(ALL_PARAMS.page) || 1),
+    sortID: parseInt(urlParams.get(ALL_PARAMS.sortID) || ALL_SORTS[0].id)
+  }
+  return initialParams
 }

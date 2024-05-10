@@ -18,7 +18,7 @@ const { isHome }: Props = Astro.props;
   id={"headerLayout"}
   transition:name="header"
   transition:animate="none"
-  class={`w-full text-white py-12 bg-customOrange-500 transition-all flex flex-col  items-center  rounded-b-[50px] sm:rounded-b-[100px]  `}
+  class={`w-full  text-white py-12 bg-customOrange-500 transition-all flex flex-col  items-center  rounded-b-[50px] sm:rounded-b-[100px]  `}
 >
   <nav class="w-full max-w-5xl flex justify-between items-center p-6 xl:p-0">
     <a href="/">
@@ -48,7 +48,7 @@ const { isHome }: Props = Astro.props;
       <div
         id="homeInitial"
         transition:animate="none"
-        class=" h-[350px] flex z-0 p-6 lg:p-0 pointer-events-none relative w-full max-w-5xl  justify-center gap-20 mx-auto "
+        class="  h-[350px] flex z-0 p-6 lg:p-0 pointer-events-none relative w-full max-w-5xl  justify-center gap-20 mx-auto "
       >
         <div class="  h-full  justify-center items-center lg:flex hidden w-full max-w-96  relative">
           <div class=" absolute  right-20 -bottom-3 -rotate-12  scale-75">
@@ -87,7 +87,6 @@ const { isHome }: Props = Astro.props;
 
 <style>
   #homeInitial {
-    animation: slideIn 1s forwards;
   }
   @keyframes slideIn {
     0% {

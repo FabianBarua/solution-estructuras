@@ -1,6 +1,3 @@
-#selectItems div span {
-    color: white;
-}
 
 #productImage:hover~#linkToProduct {
     scale: 1.1;
